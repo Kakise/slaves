@@ -1,16 +1,16 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
 # System Enviroment
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=$PATH:/bin/:/usr/bin/:/usr/sbin/
 
 # Locale Enviroment
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG fr_FR.UTF-8
+ENV LANGUAGE fr_FR:en
+ENV LC_ALL fr_FR.UTF-8
 
 # Clang Enviroment
-ENV LLVM_VERSION=4.0
+ENV LLVM_VERSION=6.0.1
 ENV CC=clang
 ENV CXX=clang++
 
@@ -19,14 +19,14 @@ ADD llvm-snapshot.gpg.key llvm-snapshot.gpg.key
 ADD apt_requirements.txt apt_requirements.txt
 
 # Apt packages
-RUN echo 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-4.0 main' >> /etc/apt/sources.list && \
+RUN echo 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main' >> /etc/apt/sources.list && \
     apt-key add ./llvm-snapshot.gpg.key && \
     apt-get update && \
     apt-get install -y $(grep -vE "^\s*#" apt_requirements.txt  | tr "\n" " ") && \
 # Update Locale
-    locale-gen en_US.UTF-8 && \
+    locale-gen fr_FR.UTF-8 && \
 # Install CMake
-    wget https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.sh -O cmake.sh && \
+    wget https://cmake.org/files/v3.12.0/cmake-3.12.0-Linux-x86_64.sh -O cmake.sh && \
     chmod +x ./cmake.sh && \
     ./cmake.sh --skip-license && \
 # Configure Clang
