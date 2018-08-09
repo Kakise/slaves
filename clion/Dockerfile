@@ -1,4 +1,4 @@
-FROM slaves/cmake:llvm
+FROM https://github.com/Kakise/slaves.git#master:cmake_llvm
 
 # Apt packages
 ADD apt_requirements.txt apt_requirements.txt
