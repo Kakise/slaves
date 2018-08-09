@@ -1,4 +1,4 @@
-FROM https://github.com/Kakise/slaves.git#master:cmake_llvm
+FROM prodromou87/llvm:7
 
 # Apt packages
 ADD apt_requirements.txt apt_requirements.txt
